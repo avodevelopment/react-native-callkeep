@@ -621,6 +621,9 @@ RCT_EXPORT_METHOD(getAudioRoutes: (RCTPromiseResolveBlock)resolve
     else if ([type isEqualToString:AVAudioSessionPortBuiltInSpeaker]){
         return @"Speaker";
     }
+    else if ([type isEqualToString:AVAudioSessionPortCarAudio]) {
+        return @"CarAudio";
+    }
     else{
         return nil;
     }
@@ -894,7 +897,7 @@ RCT_EXPORT_METHOD(getAudioRoutes: (RCTPromiseResolveBlock)resolve
 #endif
 
     AVAudioSession* audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth error:nil];
+    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord withOptions:AVAudioSessionCategoryOptionAllowBluetooth | AVAudioSessionCategoryOptionAllowBluetoothA2DP error:nil];
 
     [audioSession setMode:AVAudioSessionModeDefault error:nil];
 
